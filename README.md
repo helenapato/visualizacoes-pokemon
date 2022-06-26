@@ -10,6 +10,10 @@ Dependências:
 
 ## Subindo o servidor
 
+Clone o repositório:
+
+    git clone https://github.com/helenapato/visualizacoes-pokemon.git
+
 Esteja na pasta `visualizacoes-pokemon` e rode:
 
     python3 app.py
