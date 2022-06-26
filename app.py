@@ -1,6 +1,3 @@
-# Run this app with `python app.py` and
-# visit http://127.0.0.1:8050/ in your web browser.
-
 from dash import Dash, html, dcc, Input, Output
 
 import data
@@ -77,6 +74,59 @@ app.layout = html.Div(children=[
     ),
     html.Div(children='''
         Texto explicando o gráfico acima.
+    '''),
+
+    html.H2(children='Pequenos múltiplos correlacionando todos os atributos'),
+    dcc.Graph(
+        id='small-multiples-all-atributtes',
+        figure=visualizations.small_mulitples_all_atributtes(pokemon)
+    ),
+    html.Div(children='''
+        Texto explicando o gráfico acima.
+    '''),
+
+    html.H2(children='Mapa de tipos'),
+    dcc.Graph(
+        id='type-chart',
+        figure=visualizations.general_type_chart(pokemon)
+    ),
+    
+    html.H2(children='Mapa de tipos de uma equipe'),
+    dcc.Dropdown(
+        id='select-pokemon2',
+        options=pokemon['name'],
+        value=['Bulbasaur','Chikorita','Chespin','Snivy','Charmander','Treecko'],
+        multi=True
+    ),
+    dcc.Graph(
+        id='team-type-chart',
+        figure=visualizations.team_type_chart(pokemon, ['Bulbasaur','Chikorita','Chespin','Snivy','Charmander','Treecko'])
+    ),
+    html.Div(children='''
+        Texto explicando o gráfico acima.
+    '''),
+
+    html.H2(children='Cobertura de defesa da equipe'),
+    html.Label('Team 1'),
+    dcc.Dropdown(
+        id='select-pokemon3',
+        options=pokemon['name'],
+        value=['Bulbasaur','Chikorita','Chespin','Snivy','Charmander','Treecko'],
+        multi=True
+    ),
+    html.Label('Team 2'),
+    dcc.Dropdown(
+        id='select-pokemon4',
+        options=pokemon['name'],
+        value=['Charmander','Squirtle','Pikachu','Pidgey','Gastly', 'Abra'],
+        multi=True
+    ),
+    dcc.Graph(
+        id='teams-defense-coverage',
+        figure=visualizations.radar_plot_teams_defense(pokemon, ['Bulbasaur','Chikorita','Chespin','Snivy','Charmander','Treecko'], ['Charmander','Squirtle','Pikachu','Pidgey','Gastly', 'Abra'])
+    ),
+    html.Div(children='''
+        Texto explicando o gráfico acima.
     ''')
 ])
 
@@ -85,6 +135,19 @@ app.layout = html.Div(children=[
     Input('select-pokemon', 'value'))
 def update_attribute_radar(value):
     return visualizations.attribute_radar(pokemon, value)
+
+@app.callback(
+    Output('team-type-chart', 'figure'),
+    Input('select-pokemon2', 'value'))
+def update_team_type_chart(value):
+    return visualizations.team_type_chart(pokemon, value)
+
+@app.callback(
+    Output('teams-defense-coverage', 'figure'),
+    [Input('select-pokemon3', 'value'),
+    Input('select-pokemon4', 'value')])
+def update_team_type_chart(team1, team2):
+    return visualizations.radar_plot_teams_defense(pokemon, team1, team2)
 
 if __name__ == '__main__':
     app.run_server(debug=True)

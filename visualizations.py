@@ -158,3 +158,76 @@ def quality_histogram(pokemon):
                     title="Distribuição da qualidade dos pokémon")
 
     return fig
+
+def general_type_chart(pokemon):
+    coverage = pokemon[pokemon.type2=='none'][
+        ['type1'] + [
+                        col 
+                        for col in pokemon.columns 
+                        if 'against' in col
+                    ]
+    ].drop_duplicates().rename(columns={'type1':'type'})
+
+    coverage = coverage.set_index('type').rename(columns={ c : c.split('_')[-1] for c in coverage.columns}).sort_index()
+
+    fig = px.imshow(coverage, x=coverage.columns, y=coverage.columns,color_continuous_scale='RdBu_r',
+                    labels=dict(x="Atacante", y="Defensor", color="Multiplicador"),
+                    title='Typechart', text_auto=True,
+                    width=700, height=800,
+                )
+    fig.update_traces(dict(showscale=False, 
+                        coloraxis=None, 
+                        colorscale='RdBu_r'), selector={'type':'heatmap'})
+
+    fig.update_xaxes(side="top")
+    return fig
+
+def team_type_chart(pokemon, team):
+    coverage_team = pokemon[pokemon.name.isin(team)][
+        ['name'] + [
+                        col 
+                        for col in pokemon.columns 
+                        if 'against' in col
+                    ]
+    ].drop_duplicates().rename(columns={'type1':'type'})
+
+    coverage_team = coverage_team.set_index('name').rename(columns={ c : c.split('_')[-1] for c in coverage_team.columns}).sort_index()
+
+    fig = px.imshow(coverage_team, x=coverage_team.columns, y=coverage_team.index,color_continuous_scale='RdBu_r',
+                    labels=dict(x="Atacante", y="Defensor", color="Multiplicador"),
+                    title='Typechart', text_auto=True,
+                    width=800, height=400,
+                )
+    fig.update_traces(dict(showscale=False, 
+                        coloraxis=None, 
+                        colorscale='RdBu_r'), selector={'type':'heatmap'})
+
+    fig.update_xaxes(side="top")
+    return fig
+
+def small_mulitples_all_atributtes(pokemon):
+    fig = px.scatter_matrix(pokemon,
+        dimensions=['speed','attack','sp_attack','defense','sp_defense','hp'],
+        height=1000,
+        width=1000
+    )
+    fig.update_traces(diagonal_visible=False)
+
+    return fig
+
+def radar_plot_teams_defense(pokemon, team1, team2):
+    against_columns = [c for c in pokemon.columns if 'against' in c]
+
+    df1 = pokemon[pokemon.name.isin(team1)][against_columns+['name']].set_index('name')
+    df1 = df1.melt().groupby('variable', as_index=False).mean()
+
+    df2 = pokemon[pokemon.name.isin(team2)][against_columns+['name']].set_index('name')
+    df2 = df2.melt().groupby('variable', as_index=False).mean()
+
+    df1['team'] = 1
+    df2['team'] = 2
+
+    dfzao = pd.concat([df1,df2])
+
+    fig = px.line_polar(dfzao, r='value', theta='variable', color='team', line_close=True)
+    return fig

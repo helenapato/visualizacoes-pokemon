@@ -8,14 +8,14 @@ Dependências:
     pip install dash
     pip install pandas
 
-## Subindo o servidor
-
 Clone o repositório:
 
     git clone https://github.com/helenapato/visualizacoes-pokemon.git
 
+## Subindo o servidor
+
 Esteja na pasta `visualizacoes-pokemon` e rode:
 
-    python3 app.py
+    python app.py
 
-Verifique a mensagem impressa indicando em qual endereço o dash está rodando.
+Visite o endereço `http://127.0.0.1:8050/`.
