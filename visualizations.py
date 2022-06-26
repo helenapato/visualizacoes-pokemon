@@ -3,9 +3,9 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 
-def ability_radar(pokemon, poke_list):
+def attribute_radar(pokemon, poke_list):
     if poke_list == []:
-        return ability_radar(pokemon, ['Arceus'])
+        return attribute_radar(pokemon, ['Arceus'])
 
     # Atributos a serem mostrados
     categories = ['attack', 'defense', 'hp', 'sp_attack', 'sp_defense', 'speed']
