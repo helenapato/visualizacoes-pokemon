@@ -62,7 +62,8 @@ def type_proportion(pokemon):
 
     fig = px.treemap(pokemon, path=[px.Constant("all"), 'type1', 'type2'], values='count',
                     title="Proporção de tipos (primário e secundário)",
-                    color_discrete_map=colors_dict)
+                    color_discrete_map=colors_dict,
+                    width=1200, height=600)
 
     return fig
 
@@ -108,7 +109,8 @@ def type_proportion_evolution_cumulative(pokemon):
         title="Evolução da proporção de tipos acumulado",
         xaxis_title="Geração",
         yaxis_title="Número de pokémon",
-        legend_title="Tipo de pokémon"
+        legend_title="Tipo de pokémon",
+        width=1000, height=600
     )
 
     return plot
@@ -135,7 +137,8 @@ def type_proportion_evolution_absolute(pokemon):
         title="Evolução da proporção de tipos por geração",
         xaxis_title="Geração",
         yaxis_title="Número de pokémon",
-        legend_title="Tipo de pokémon"
+        legend_title="Tipo de pokémon",
+        width=1000, height=600
     )
 
     return plot
@@ -155,7 +158,8 @@ def quality_histogram(pokemon):
     fig = px.histogram(df, x="data", color="series", barmode="overlay",
                 labels={"data": "Qualidade do pokémon",
                         "series": "Lendário?"},
-                    title="Distribuição da qualidade dos pokémon")
+                    title="Distribuição da qualidade dos pokémon",
+                    width=1000, height=500)
 
     return fig
 
@@ -195,7 +199,7 @@ def team_type_chart(pokemon, team):
 
     fig = px.imshow(coverage_team, x=coverage_team.columns, y=coverage_team.index,color_continuous_scale='RdBu_r',
                     labels=dict(x="Atacante", y="Defensor", color="Multiplicador"),
-                    title='Typechart', text_auto=True,
+                    title='Typechart por equipe', text_auto=True,
                     width=800, height=400,
                 )
     fig.update_traces(dict(showscale=False, 
@@ -209,7 +213,8 @@ def small_mulitples_all_atributtes(pokemon):
     fig = px.scatter_matrix(pokemon,
         dimensions=['speed','attack','sp_attack','defense','sp_defense','hp'],
         height=1000,
-        width=1000
+        width=1000,
+        title='Correlação entre cada atributo'
     )
     fig.update_traces(diagonal_visible=False)
 
@@ -230,4 +235,7 @@ def radar_plot_teams_defense(pokemon, team1, team2):
     dfzao = pd.concat([df1,df2])
 
     fig = px.line_polar(dfzao, r='value', theta='variable', color='team', line_close=True)
+    fig.update_layout(title="Cobertura de defesa da equipe",
+                  legend_title="Equipe",
+                  width=600, height=500)
     return fig

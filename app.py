@@ -107,14 +107,14 @@ app.layout = html.Div(children=[
     '''),
 
     html.H2(children='Cobertura de defesa da equipe'),
-    html.Label('Team 1'),
+    html.Label('Equipe 1'),
     dcc.Dropdown(
         id='select-pokemon3',
         options=pokemon['name'],
         value=['Bulbasaur','Chikorita','Chespin','Snivy','Charmander','Treecko'],
         multi=True
     ),
-    html.Label('Team 2'),
+    html.Label('Equipe 2'),
     dcc.Dropdown(
         id='select-pokemon4',
         options=pokemon['name'],
