@@ -4,6 +4,7 @@ import data
 import visualizations
 
 app = Dash(__name__)
+server = app.server
 
 pokemon = data.read_process_data()
 
