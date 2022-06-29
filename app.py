@@ -34,6 +34,49 @@ content = html.Div(
         html.H1(children='Visualizações Pokémon'),
 
         html.Div([
+            html.H2(children='Motivação'),
+            html.P('''
+                Quase todo mundo teve contato com Pokémon em algum momento da vida. E quem conhece 
+                sabe que usamos os monstrinhos para diversas atividades ou tarefas nos diferentes 
+                jogos da franquia, sendo a principal delas a batalha. Como treinadores Pokémon, devemos 
+                capturar os bichinhos e então treiná-los, evoluí-los e usá-los em batalha para avançar no jogo.
+            '''),
+            html.P('''
+                Nesse contexto usamos diferentes formas de escolher quais Pokémon utilizar em nossa equipe, 
+                que possui espaço para 6 deles. Entretanto, os jogos em modo história não exigem um critério 
+                de escolha muito sofisticado, visto que não se tratam de jogos muito desafiadores. Dessa forma, 
+                para a escolha dos bichinhos levamos em consideração fatores bastante particulares, como nostalgia, 
+                aparência, intuição, etc.
+            '''),
+            html.P('''
+                Contudo, tudo muda drasticamente quando vamos para o cenário competitivo. Nesse tipo de batalha, 
+                lutamos contra outros jogadores, e não mais contra personagens programados. Os tipos, atributos, 
+                movimentos e habilidades de cada um dos nossos pokémon têm um fator crucial para o desenrolar da 
+                partida. Nesse novo cenário a escolha da equipe é muito importante e decisiva. E considerando que 
+                atualmente existem mais de 800 pokémon, essa escolha é um verdadeiro desafio. 
+            '''),
+        ]),
+
+        html.Div([
+            html.H2(children='O problema'),
+            html.P('''
+                Os pokémon possuem tipos primários e secundários, características físicas, diversos atributos 
+                de batalha e vários tipos de movimentos e habilidades. Tudo isso gera uma quantidade imensa de 
+                dados a serem analisados durante a montagem da equipe. Esse tipo de dado é facilmente encontrado 
+                online em formato tabular, seguindo uma estrutura de "pokédex", com raras visualizações.
+
+            '''),
+            html.P('''
+                Entender os tipos e atributos de cada pokémon é essencial para montar uma equipe coesa e com 
+                potencial competitivo. E para isso, uma ótima forma seria fazer visualizações bem pensadas e 
+                eficientes retratando e comparando diferentes aspectos dos monstrinhos. Colocaríamos em prática 
+                diversos conhecimentos aprendidos na disciplina com o intuito de guiar o processo de decisão de 
+                treinadores competitivos e entusiastas de pokémon.
+
+            '''),
+        ]),
+
+        html.Div([
             html.H2(children='Pequenos múltiplos correlacionando todos os atributos'),
             dcc.Graph(
                 id='small-multiples-all-atributtes',
@@ -41,8 +84,9 @@ content = html.Div(
             ),
             html.P('''
                 Cada pokémon possui 6 atributos de batalha. São eles: Velocidade, Ataque, Ataque Especial, 
-                Defesa, Defesa Especial, Pontos de Vida. Eles são numéricos e quanto maiores, melhor. 
-                
+                Defesa, Defesa Especial, Pontos de Vida. Eles são numéricos e quanto maiores, melhor.
+            '''),
+            html.P('''
                 Os gráficos de dispersão acima mostram a correlação entre cada um desses atributos com 
                 todos os outros. Cada ponto é um pokémon.
             ''')
@@ -56,15 +100,19 @@ content = html.Div(
                 id='quality-histogram',
                 figure=visualizations.quality_histogram(pokemon)
             ),
-            html.P('''Uma forma de medir aproximadamente a "qualidade" de um pokémon é calculando a 
-            soma dos seus 6 atributos de batalha. 
-            
+            html.P('''
+            Uma forma de medir aproximadamente a "qualidade" de um pokémon é calculando a 
+            soma dos seus 6 atributos de batalha.
+            '''),
+            html.P('''
             Existem dois tipos de pokémon, regulares e lendários. Lendários são pokémon exclusivos e 
             normalmente possuem limtações no uso competitivo.
-            
+            '''),
+            html.P('''
             O gráfico acima mostra 2 histogramas de qualidade dos pokémon, ou seja, a quantidade de pokémon 
             cujos atributos de batalha têm como soma um determinado valor, que quanto maior, melhor. 
-            Separamos os pokémon regulares e lendários entre histogramas azul e vermelho, respectivamente.'''),
+            Separamos os pokémon regulares e lendários entre histogramas azul e vermelho, respectivamente.
+            '''),
         ],
             id="quality-histogram-id",
         ),
@@ -153,28 +201,34 @@ content = html.Div(
             id='general-type-chart-id'
         ),
 
-        html.Div([
+        html.Div(children=[
             html.H2(children='Radar de atributos'),
-            dcc.Dropdown(
-                id='select-pokemon',
-                options=pokemon['name'],
-                value=['Bulbasaur','Chikorita','Chespin','Snivy','Charmander','Treecko'],
-                multi=True
-            ),
-            dcc.Graph(
-                id='attribute-radar-1',
-                figure=visualizations.attribute_radar(pokemon, ['Bulbasaur','Chikorita','Chespin','Snivy','Charmander','Treecko'])
-            ),
-            dcc.Dropdown(
-                id='select-pokemon-6',
-                options=pokemon['name'],
-                value=['Charmander','Squirtle','Pikachu','Pidgey','Gastly', 'Abra'],
-                multi=True
-            ),
-            dcc.Graph(
-                id='attribute-radar-2',
-                figure=visualizations.attribute_radar(pokemon, ['Charmander','Squirtle','Pikachu','Pidgey','Gastly', 'Abra'])
-            ),
+            html.Div(children=[
+                html.Div(children=[
+                    dcc.Dropdown(
+                        id='select-pokemon',
+                        options=pokemon['name'],
+                        value=['Bulbasaur','Chikorita','Chespin','Snivy','Charmander','Treecko'],
+                        multi=True
+                    ),
+                    dcc.Graph(
+                        id='attribute-radar-1',
+                        figure=visualizations.attribute_radar(pokemon, ['Bulbasaur','Chikorita','Chespin','Snivy','Charmander','Treecko'])
+                    )
+                ]),
+                html.Div(children=[
+                    dcc.Dropdown(
+                        id='select-pokemon-6',
+                        options=pokemon['name'],
+                        value=['Charmander','Squirtle','Pikachu','Pidgey','Gastly', 'Abra'],
+                        multi=True
+                    ),
+                    dcc.Graph(
+                        id='attribute-radar-2',
+                        figure=visualizations.attribute_radar(pokemon, ['Charmander','Squirtle','Pikachu','Pidgey','Gastly', 'Abra'])
+                    )
+                ])
+            ], style={'display': 'flex', 'flex-direction': 'row'}),
             html.P('''
                 O gráfico acima mostra os 6 atributos de batalha de 1 ou mais pokémon à sua escolha 
                 em formato de radar. Nese tipo de visualização podemos perceber se os atributos de 
@@ -235,12 +289,15 @@ content = html.Div(
                 id='teams-defense-coverage',
                 figure=visualizations.radar_plot_teams_defense(pokemon, ['Bulbasaur','Chikorita','Chespin','Snivy','Charmander','Treecko'], ['Charmander','Squirtle','Pikachu','Pidgey','Gastly', 'Abra'])
             ),
-            html.P('''Forma inteligente de visualizar a cobrtura de defesa de uma equipe. 
+            html.P('''
+            Forma inteligente de visualizar a cobrtura de defesa de uma equipe. 
             Calculamos cada valor através da média dos multiplicadores de dano recebido de cada um dos 
-            18 tipos, para cada pokémon da equipe definida. 
-            
+            18 tipos, para cada pokémon da equipe definida.
+            '''),
+            html.P('''
             Equipes com tipos variados se mostram como escolhas mais seguras, menos picos(desvantagens 
-            grandes) e menos vales(vantagens grandes).'''),
+            grandes) e menos vales(vantagens grandes).
+            '''),
         ],
         id="teams-defense-coverage-id",
         ),
