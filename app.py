@@ -68,8 +68,8 @@ content = html.Div(
             '''),
             html.P('''
                 Entender os tipos e atributos de cada pokémon é essencial para montar uma equipe coesa e com 
-                potencial competitivo. E para isso, uma ótima forma seria fazer visualizações bem pensadas e 
-                eficientes retratando e comparando diferentes aspectos dos monstrinhos. Colocaríamos em prática 
+                potencial competitivo. E para isso, uma ótima forma é fazer visualizações bem pensadas e 
+                eficientes retratando e comparando diferentes aspectos dos monstrinhos. Colocamos em prática 
                 diversos conhecimentos aprendidos na disciplina com o intuito de guiar o processo de decisão de 
                 treinadores competitivos e entusiastas de pokémon.
 
@@ -124,9 +124,9 @@ content = html.Div(
                 figure=vis_corr_capture_quality
             ),
             html.P(f'''
-                Pokémon precisam ser capturado e cada um deles possui uma dificuldade de captura 
+                Pokémon precisam ser capturados e cada um deles possui uma dificuldade de captura 
                 associada (taxa de captura, quanto mais alta mais fácil). 
-                O gráfico de sipersão acima mostra a correlação entre a taxa de captura e a qualidade 
+                O gráfico de dispersão acima mostra a correlação entre a taxa de captura e a qualidade 
                 de um pokémon (soma dos 6 atributos de batalha). 
                 O coeficiente de correlação observado é {corr}.
             ''')
@@ -141,7 +141,7 @@ content = html.Div(
                 figure=visualizations.type_proportion(pokemon)
             ),
             html.P('''
-                Cada pokémon possuí um tipo primario obrigatório e um tipo secundário opcional. 
+                Cada pokémon possuí um tipo primário obrigatório e um tipo secundário opcional. 
                 O gráfico treemap acima mostra a proporção entre todos os tipos primários de pokémon. 
                 Podemos clicar em cada quadrado para mostrar a proporção de tipos secundários 
                 para aquele determinado tipo primário.
@@ -178,8 +178,8 @@ content = html.Div(
                 Em cada geração uma nova leva de pokémon é adicionada, os gráficos acima mostram como 
                 a proporção entre tipos se manteve com o passar das gerações. 
                 O primeiro gráfico mostra os valores de forma acumulada, o seja cada geração é a soma 
-                dela com todas as gerações anteriores; já o segundo gráfico mostra os valores mostra o 
-                valor de forma absoluta, ou seja o valor mostrado é apenas a quantidade de pokémon 
+                dela com todas as gerações anteriores; já o segundo gráfico mostra os valores 
+                de forma absoluta, ou seja, o valor mostrado é apenas a quantidade de pokémon 
                 adicionada na geração em questão.
             ''')
             ],
@@ -290,13 +290,13 @@ content = html.Div(
                 figure=visualizations.radar_plot_teams_defense(pokemon, ['Bulbasaur','Chikorita','Chespin','Snivy','Charmander','Treecko'], ['Charmander','Squirtle','Pikachu','Pidgey','Gastly', 'Abra'])
             ),
             html.P('''
-            Forma inteligente de visualizar a cobrtura de defesa de uma equipe. 
+            Forma inteligente de visualizar a cobertura de defesa de uma equipe. 
             Calculamos cada valor através da média dos multiplicadores de dano recebido de cada um dos 
             18 tipos, para cada pokémon da equipe definida.
             '''),
             html.P('''
-            Equipes com tipos variados se mostram como escolhas mais seguras, menos picos(desvantagens 
-            grandes) e menos vales(vantagens grandes).
+            Equipes com tipos variados se mostram como escolhas mais seguras, menos picos (desvantagens 
+            grandes) e menos vales (vantagens grandes).
             '''),
         ],
         id="teams-defense-coverage-id",
