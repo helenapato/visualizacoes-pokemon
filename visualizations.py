@@ -21,7 +21,7 @@ def attribute_radar(pokemon, poke_list):
     fig.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0, max(max_list)])),
                     title="Atributos da equipe",
                     legend_title="Equipe",
-                    width=700, height=700)
+                    width=600, height=600)
 
     return fig
 

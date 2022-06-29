@@ -15,6 +15,7 @@ Crie um ambiente virtual e instale as dependências:
 python3 -m venv venv
 source venv/bin/activate
 pip install dash
+pip install dash_bootstrap_components
 pip install pandas
 ```
 
